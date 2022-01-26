@@ -1,4 +1,5 @@
 import '../index.css'
+import Footer from './Footer';
 import Header from './Header';
 import Main from './Main';
 
@@ -7,9 +8,7 @@ function App() {
     <div className="body__container">
         <Header />
         <Main />
-        <footer class="footer">
-          <p class="footer__author">© 2021. Руслан Бакиров</p>
-        </footer>
+        <Footer />
       </div>
   );
 }
