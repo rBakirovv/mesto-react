@@ -1,11 +1,10 @@
-import './index.css'
+import '../index.css'
+import Header from './Header';
 
 function App() {
   return (
     <div className="body__container">
-        <header class="header">
-          <div class="header__logo"></div>
-        </header>
+        <Header />
         <main>
           <section class="profile">
             <div class="profile__container">
