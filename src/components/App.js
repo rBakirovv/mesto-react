@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import '../index.css'
 import Footer from './Footer';
 import Header from './Header';
@@ -7,16 +8,20 @@ import PopupWithForm from './PopupWithForm';
 
 function App() {
 
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+
   function handleEditAvatarClick() {
-    document.querySelector('.popup__avatar').classList.add('popup_opened');
+    setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
   }
 
   function handleEditProfileClick() {
-    document.querySelector('.popup__edit').classList.add('popup_opened');
+    setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
   }
 
   function handleAddPlaceClick() {
-    document.querySelector('.popup__add').classList.add('popup_opened');
+    setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
   }
 
   return (
@@ -31,6 +36,7 @@ function App() {
       <PopupWithForm
         name='avatar'
         title='Обновить аватар'
+        isOpen={isEditAvatarPopupOpen}
         children={
           <>
             <input className="popup__field popup__field-link-avatar" id="popup__field-link-avatar" name="avatar" type="url"
@@ -43,6 +49,7 @@ function App() {
       <PopupWithForm
         name='edit'
         title='Редактировать профиль'
+        isOpen={isEditProfilePopupOpen}
         children={
           <>
             <input className="popup__field popup__field-name" id="popup__field-name" name="name" type="text" required
@@ -58,6 +65,7 @@ function App() {
       <PopupWithForm
         name='add'
         title='Новое место'
+        isOpen={isAddPlacePopupOpen}
         children={
           <>
             <input className="popup__field popup__field-mesto" id="popup__field-mesto" name="name" type="text"
