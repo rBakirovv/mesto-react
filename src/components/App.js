@@ -14,29 +14,36 @@ function App() {
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
-  }
+  };
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
-  }
+  };
 
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
-  }
+  };
+
+  function closeAllPopups() {
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
+  };
 
   return (
     <div className="body__container">
       <Header />
       <Main
-        onEditProfile={ handleEditProfileClick }
-        onEditAvatar={ handleEditAvatarClick }
-        onAddPlace={ handleAddPlaceClick }
+        onEditProfile={handleEditProfileClick}
+        onEditAvatar={handleEditAvatarClick}
+        onAddPlace={handleAddPlaceClick}
       />
       <Footer />
       <PopupWithForm
         name='avatar'
         title='Обновить аватар'
         isOpen={isEditAvatarPopupOpen}
+        onClose={closeAllPopups}
         children={
           <>
             <input className="popup__field popup__field-link-avatar" id="popup__field-link-avatar" name="avatar" type="url"
@@ -50,6 +57,7 @@ function App() {
         name='edit'
         title='Редактировать профиль'
         isOpen={isEditProfilePopupOpen}
+        onClose={closeAllPopups}
         children={
           <>
             <input className="popup__field popup__field-name" id="popup__field-name" name="name" type="text" required
@@ -66,6 +74,7 @@ function App() {
         name='add'
         title='Новое место'
         isOpen={isAddPlacePopupOpen}
+        onClose={closeAllPopups}
         children={
           <>
             <input className="popup__field popup__field-mesto" id="popup__field-mesto" name="name" type="text"
@@ -81,6 +90,6 @@ function App() {
       <ImagePopup />
     </div>
   );
-}
+};
 
 export default App;
