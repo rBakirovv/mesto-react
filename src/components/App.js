@@ -12,6 +12,12 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
 
+  const [selectedCard, setSelectedCard] = useState({
+    isImageOpen: false,
+    link: '',
+    name: '',
+  });
+
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
   };
@@ -28,7 +34,13 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
+    setSelectedCard({ isImageOpen: false, link: '', name: '' })
   };
+
+  function handleCardClick(card) {
+    const { link, name } = card
+    setSelectedCard({ isImageOpen: true, link: link, name: name })
+  }
 
   return (
     <div className="body__container">
@@ -37,6 +49,7 @@ function App() {
         onEditProfile={handleEditProfileClick}
         onEditAvatar={handleEditAvatarClick}
         onAddPlace={handleAddPlaceClick}
+        onCardClick={handleCardClick}
       />
       <Footer />
       <PopupWithForm
@@ -94,7 +107,12 @@ function App() {
           <button className="popup__button-save" type="submit">Да</button>
         }
       />
-      <ImagePopup />
+      <ImagePopup
+        name={selectedCard.name}
+        link={selectedCard.link}
+        isOpen={selectedCard.isImageOpen}
+        onClose={closeAllPopups}
+      />
     </div>
   );
 };
