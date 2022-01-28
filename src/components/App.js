@@ -87,6 +87,13 @@ function App() {
           </>
         }
       />
+      <PopupWithForm 
+        name='confirm'
+        title='Вы уверены?'
+        children = {
+          <button class="popup__button-save" type="submit">Да</button>
+        }
+      />
       <ImagePopup />
     </div>
   );
