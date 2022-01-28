@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import api from '../utils/Api';
+import Card from './Card';
 
 function Main(props) {
 
@@ -7,13 +8,29 @@ function Main(props) {
     const [userDescription, setUserDescription] = useState('');
     const [userAvatar, setUserAvatar] = useState('');
 
+    const [cards, setCards] = useState([])
+
     useEffect(() => {
-        api.getUserInfo().then(data => {
-            setUserName(data.name)
-            setUserDescription(data.about)
-            setUserAvatar(data.avatar)
-        })
+        api.getUserInfo()
+            .then(data => {
+                setUserName(data.name)
+                setUserDescription(data.about)
+                setUserAvatar(data.avatar)
+            })
+            .catch((err) => {
+                console.log(err);
+            })
     }, []);
+
+    useEffect(() => {
+        api.getInitialCards()
+            .then(data => {
+                setCards(data)
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }, [])
 
     return (
         <main>
@@ -31,7 +48,9 @@ function Main(props) {
                     <button type="button" aria-label="Add" className="profile__add-button" onClick={props.onAddPlace}></button>
                 </div>
             </section>
-            <section className="elements"></section>
+            <section className="elements">
+                {cards.map((card, i) => <Card key={i} card={card}/>)}
+            </section>
         </main>
     )
 };
