@@ -15,7 +15,6 @@ function Main(props) {
         })
     }, []);
 
-
     return (
         <main>
             <section className="profile">

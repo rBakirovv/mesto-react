@@ -61,10 +61,10 @@ function App() {
         children={
           <>
             <input className="popup__field popup__field-name" id="popup__field-name" name="name" type="text" required
-              minlength="2" maxlength="40" />
+              minLength="2" maxLength="40" />
             <span id="popup__field-name-error" className="popup__error"></span>
             <input className="popup__field popup__field-status" id="popup__field-status" name="about" type="text" required
-              minlength="2" maxlength="200" />
+              minLength="2" maxLength="200" />
             <span id="popup__field-status-error" className="popup__error"></span>
             <button className="popup__button-save" type="submit">Сохранить</button>
           </>
@@ -78,7 +78,7 @@ function App() {
         children={
           <>
             <input className="popup__field popup__field-mesto" id="popup__field-mesto" name="name" type="text"
-              placeholder="Название" required minlength="2" maxlength="30" />
+              placeholder="Название" required minLength="2" maxLength="30" />
             <span id="popup__field-mesto-error" className="popup__error"></span>
             <input className="popup__field popup__field-link-mesto" id="popup__field-link-mesto" name="link" type="url"
               placeholder="Ссылка на картинку" required />
@@ -87,11 +87,11 @@ function App() {
           </>
         }
       />
-      <PopupWithForm 
+      <PopupWithForm
         name='confirm'
         title='Вы уверены?'
-        children = {
-          <button class="popup__button-save" type="submit">Да</button>
+        children={
+          <button className="popup__button-save" type="submit">Да</button>
         }
       />
       <ImagePopup />
