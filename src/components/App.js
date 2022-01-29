@@ -55,6 +55,7 @@ function App() {
       <PopupWithForm
         name='avatar'
         title='Обновить аватар'
+        buttonText='Сохранить'
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
         children={
@@ -62,13 +63,13 @@ function App() {
             <input className="popup__field popup__field-link-avatar" id="popup__field-link-avatar" name="avatar" type="url"
               placeholder="Ссылка на картинку" required />
             <span id="popup__field-link-avatar-error" className="popup__error"></span>
-            <button className="popup__button-save" type="submit">Сохранить</button>
           </>
         }
       />
       <PopupWithForm
         name='edit'
         title='Редактировать профиль'
+        buttonText='Сохранить'
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
         children={
@@ -79,13 +80,13 @@ function App() {
             <input className="popup__field popup__field-status" id="popup__field-status" name="about" type="text" required
               minLength="2" maxLength="200" placeholder="О себе" />
             <span id="popup__field-status-error" className="popup__error"></span>
-            <button className="popup__button-save" type="submit">Сохранить</button>
           </>
         }
       />
       <PopupWithForm
         name='add'
         title='Новое место'
+        buttonText='Создать'
         isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
         children={
@@ -96,16 +97,13 @@ function App() {
             <input className="popup__field popup__field-link-mesto" id="popup__field-link-mesto" name="link" type="url"
               placeholder="Ссылка на картинку" required />
             <span id="popup__field-link-mesto-error" className="popup__error"></span>
-            <button className="popup__button-save" type="submit">Создать</button>
           </>
         }
       />
       <PopupWithForm
         name='confirm'
         title='Вы уверены?'
-        children={
-          <button className="popup__button-save" type="submit">Да</button>
-        }
+        buttonText='Да'
       />
       <ImagePopup
         name={selectedCard.name}
