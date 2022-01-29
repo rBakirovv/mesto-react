@@ -74,10 +74,10 @@ function App() {
         children={
           <>
             <input className="popup__field popup__field-name" id="popup__field-name" name="name" type="text" required
-              minLength="2" maxLength="40" />
+              minLength="2" maxLength="40" placeholder="Имя" />
             <span id="popup__field-name-error" className="popup__error"></span>
             <input className="popup__field popup__field-status" id="popup__field-status" name="about" type="text" required
-              minLength="2" maxLength="200" />
+              minLength="2" maxLength="200" placeholder="О себе" />
             <span id="popup__field-status-error" className="popup__error"></span>
             <button className="popup__button-save" type="submit">Сохранить</button>
           </>
