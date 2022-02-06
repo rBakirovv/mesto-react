@@ -1,26 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import api from '../utils/Api';
 import Card from './Card';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Main(props) {
 
-    const [userName, setUserName] = useState('');
-    const [userDescription, setUserDescription] = useState('');
-    const [userAvatar, setUserAvatar] = useState('');
+    const [cards, setCards] = useState([]);
 
-    const [cards, setCards] = useState([])
-
-    useEffect(() => {
-        api.getUserInfo()
-            .then(data => {
-                setUserName(data.name)
-                setUserDescription(data.about)
-                setUserAvatar(data.avatar)
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-    }, []);
+    const currentUser = React.useContext(CurrentUserContext);
 
     useEffect(() => {
         api.getInitialCards()
@@ -36,13 +23,13 @@ function Main(props) {
         <main>
             <section className="profile">
                 <div className="profile__container">
-                    <img src={userAvatar} className="profile__avatar" alt="Аватар" />
+                    <img src={currentUser.avatar} className="profile__avatar" alt="Аватар" />
                     <button type="button" aria-label="Edit" className="profile__avatar-button" onClick={props.onEditAvatar}></button>
                     <div className="profile__info">
                         <div className="profile__edit">
-                            <h1 className="profile__name">{userName}</h1>
+                            <h1 className="profile__name">{currentUser.name}</h1>
                             <button type="button" aria-label="Edit" className="profile__edit-button" onClick={props.onEditProfile}></button>
-                            <p className="profile__status">{userDescription}</p>
+                            <p className="profile__status">{currentUser.about}</p>
                         </div>
                     </div>
                     <button type="button" aria-label="Add" className="profile__add-button" onClick={props.onAddPlace}></button>
