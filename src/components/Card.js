@@ -6,10 +6,11 @@ function Card(props) {
   const currentUser = React.useContext(CurrentUserContext);
 
   const isOwn = props.card.owner._id === currentUser._id;
+  const isLiked = props.card.likes.some(i => i._id === currentUser._id);
 
-  const cardDeleteButtonClassName = (
-    `elements__trash-button ${isOwn ? ' ' : 'elements__trash-button_hiden'}`
-  ); 
+  const cardDeleteButtonClassName = `elements__trash-button ${isOwn ? ' ' : 'elements__trash-button_hiden'}`; 
+
+  const cardLikeButtonClassName = `elements__like-button ${isLiked ? 'elements__like-button_active' : ''}`; 
 
   function handleCardClick() {
     props.onCardClick(props.card);
@@ -22,7 +23,7 @@ function Card(props) {
       <div className="elements__item-container">
         <h2 className="elements__title">{props.card.name}</h2>
         <div className="elements__like-container">
-          <button type="button" className="elements__like-button" aria-label="Like"></button>
+          <button type="button" className={cardLikeButtonClassName} aria-label="Like"></button>
           <span className="elements__like-number">{props.card.likes.length}</span>
         </div>
       </div>
