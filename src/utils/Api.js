@@ -55,7 +55,7 @@ class Api {
       .then(this._errorHandler);
   };
 
-  deleteCard({ _id }) {
+  deleteCard(_id) {
     return fetch(`${this._baseUrl}/cards/${_id}`, {
       method: 'DELETE',
       headers: this._headers,
@@ -63,17 +63,9 @@ class Api {
       .then(this._errorHandler);
   };
 
-  setLike({ _id }) {
+  changeLikeCardStatus(_id, isLiked) {
     return fetch(`${this._baseUrl}/cards/${_id}/likes`, {
-      method: 'PUT',
-      headers: this._headers,
-    })
-      .then(this._errorHandler);
-  };
-
-  deleteLike({ _id }) {
-    return fetch(`${this._baseUrl}/cards/${_id}/likes`, {
-      method: 'DELETE',
+      method: `${isLiked ? 'PUT' : 'DELETE'}`,
       headers: this._headers,
     })
       .then(this._errorHandler);
