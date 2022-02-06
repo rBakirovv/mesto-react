@@ -15,11 +15,20 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
 
   const [currentUser, setCurrentUser] = useState('');
+  const [cards, setCards] = useState([]);
 
   useEffect(() => {
     api.getUserInfo()
       .then(data => {
         setCurrentUser(data)
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+
+    api.getInitialCards()
+      .then(data => {
+        setCards(data)
       })
       .catch((err) => {
         console.log(err);
@@ -65,6 +74,7 @@ function App() {
           onEditAvatar={handleEditAvatarClick}
           onAddPlace={handleAddPlaceClick}
           onCardClick={handleCardClick}
+          cards={cards}
         />
         <Footer />
         <PopupWithForm

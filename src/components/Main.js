@@ -1,23 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import api from '../utils/Api';
 import Card from './Card';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Main(props) {
 
-    const [cards, setCards] = useState([]);
-
     const currentUser = React.useContext(CurrentUserContext);
-
-    useEffect(() => {
-        api.getInitialCards()
-            .then(data => {
-                setCards(data)
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-    }, [])
 
     return (
         <main>
@@ -36,7 +23,7 @@ function Main(props) {
                 </div>
             </section>
             <section className="elements">
-                {cards.map((card) => <Card key={card._id} card={card} onCardClick={props.onCardClick} />)}
+                {props.cards.map((card) => <Card key={card._id} card={card} onCardClick={props.onCardClick} />)}
             </section>
         </main>
     )
