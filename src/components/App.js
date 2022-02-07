@@ -5,6 +5,7 @@ import Footer from './Footer';
 import Header from './Header';
 import ImagePopup from './ImagePopup';
 import PopupWithForm from './PopupWithForm';
+import EditProfilePopup from './EditProfilePopup';
 import api from '../utils/Api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
@@ -88,6 +89,17 @@ function App() {
       });
   }
 
+  function handleUpdateUser(data) {
+    api.setUserInfo(data)
+      .then((updatedUserData) => {
+        setCurrentUser(updatedUserData);
+        closeAllPopups();
+      })
+      .catch(err => {
+        console.log(`Ошибка: ${err}`);
+      });
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="body__container">
@@ -116,23 +128,7 @@ function App() {
             </>
           }
         />
-        <PopupWithForm
-          name='edit'
-          title='Редактировать профиль'
-          buttonText='Сохранить'
-          isOpen={isEditProfilePopupOpen}
-          onClose={closeAllPopups}
-          children={
-            <>
-              <input className="popup__field popup__field-name" id="popup__field-name" name="name" type="text" required
-                minLength="2" maxLength="40" placeholder="Имя" />
-              <span id="popup__field-name-error" className="popup__error"></span>
-              <input className="popup__field popup__field-status" id="popup__field-status" name="about" type="text" required
-                minLength="2" maxLength="200" placeholder="О себе" />
-              <span id="popup__field-status-error" className="popup__error"></span>
-            </>
-          }
-        />
+        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
         <PopupWithForm
           name='add'
           title='Новое место'
