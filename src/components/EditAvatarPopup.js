@@ -6,7 +6,6 @@ export default function EditAvatarPopup(props) {
     const userAvatar = React.useRef();
 
     React.useEffect(() => {
-        
         userAvatar.current.value = '';
     }, [props.isOpen]);
 
