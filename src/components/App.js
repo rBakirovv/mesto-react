@@ -7,6 +7,7 @@ import ImagePopup from './ImagePopup';
 import PopupWithForm from './PopupWithForm';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
+import AddPlacePopup from './AddPlacePopup';
 import api from '../utils/Api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
@@ -112,6 +113,17 @@ function App() {
       });
   }
 
+  function handleAddPlaceSubmit(data) {
+    api.createNewCard(data)
+      .then((updatedCardsData) => {
+        setCards([updatedCardsData, ...cards]);
+        closeAllPopups();
+      })
+      .catch(err => {
+        console.log(`Ошибка: ${err}`);
+      });
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="body__container">
@@ -128,23 +140,7 @@ function App() {
         <Footer />
         <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
         <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
-        <PopupWithForm
-          name='add'
-          title='Новое место'
-          buttonText='Создать'
-          isOpen={isAddPlacePopupOpen}
-          onClose={closeAllPopups}
-          children={
-            <>
-              <input className="popup__field popup__field-mesto" id="popup__field-mesto" name="name" type="text"
-                placeholder="Название" required minLength="2" maxLength="30" />
-              <span id="popup__field-mesto-error" className="popup__error"></span>
-              <input className="popup__field popup__field-link-mesto" id="popup__field-link-mesto" name="link" type="url"
-                placeholder="Ссылка на картинку" required />
-              <span id="popup__field-link-mesto-error" className="popup__error"></span>
-            </>
-          }
-        />
+        <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} />
         <PopupWithForm
           name='confirm'
           title='Вы уверены?'
